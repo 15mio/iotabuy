@@ -1,48 +1,105 @@
-<html>
+<html lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheapest way to buy IOTA</title>
+  <style>
+    body {
+      background: #330867;
+      background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #3f9fad 100%);
+      color: white;
+      font-family: Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      line-height: 1.2;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+    }
+    p {font-size: 1.8rem;margin-bottom: 2rem;}
+    h1, h2, h3, h4 {margin: 0 0 2rem;font-weight: inherit;}
+    h1 {font-size: 3.5rem;}
+    h2 {font-size: 2.5rem;}
+    h3 {font-size: 2rem;}
+    h4 {font-size: 1.5rem;}
+    small, .font_small {font-size: 1.5rem;}
+    .wrapper {
+      max-width: 45rem;
+      margin: 3rem auto;
+      padding: 1rem;
+    }
+    .tableWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      width: 100%;
+    }
+    @media (min-width: 600px) {
+      .tableWrapper {flex-direction: row;}
+      .tableWrapper > div {margin-right: 2rem;}
+    }
+    .tableWrapper > div {flex-grow: 1;margin-bottom: 3rem;}
+    main {margin-bottom: 3rem;}
+    pre {max-width: 100%;overflow: auto;}
+    table {border-collapse: collapse;table-layout: fixed;width: 100%;overflow: auto}
+    tr {border-bottom: 1px solid rgba(255,255,255,0.3);}
+    tr:first-child {border-top: 1px solid rgba(255,255,255,0.3);}
+    td {padding: 1rem 0; }
+    td:nth-child(even) {text-align: right;}
+    code {white-space: initial;}
+    .loading:before {
+      animation: 1s ease-in infinite loading;
+      background: white;
+      border-radius: 50%;
+      content: '';
+      display: block;
+      height: 1rem;
+      margin: 0 auto;
+      width: 1rem;
+    }
+    @keyframes loading {
+      0% {opacity: 1; transform: scale(1)}
+      50% {opacity: 0.2; transform: scale(1.02)}
+      100% {opacity: 1; transform: scale(1)}
+    }
+  </style>
 </head>
 <body>
-<h1>Cheapest way to buy IOTA</h1>
-
-<div>
-I often buy coins at Kraken in order to buy IOTA at Bitfinex. Which coin is the best?
-</div>
-<br/>
-<br/>
-<div style="float:left; width: 300px">
-  <strong>Kraken</strong>
-
-  <table id="res-kraken">
-  </table>
-
-  <table id="res-kraken-eur">
-  </table>
-</div>
-
-<div style="float:left; width: 300px;">
-  <strong>BFX</strong>
-
-  <table id="res-bfx"></table>
-</div>
-
-<div style="clear: both;">
-  <strong>Buying IOTA with fiat via Kraken</strong>
-
-  <table>
-    <tr><td>IOT/USD     (BFX)</td><td id="iotusd"></td><tr>
-    <tr><td>USD/ETH (Kraken) -> ETH/IOT (BFX)</td><td id="iot-ethusd"></td><tr>
-    <tr><td>USD/BTC (Kraken) -> BTC/IOT (BFX)</td><td id="iot-btcusd"></td><tr>
-  </table>
-</div>
-
-<div>
-  <br/>
-  <br/>
-  <br/>
-  Buy me a cup of coffee if you like my efforts: <br/>
-  <br/>
-  ICSDEFUOZUIDG9MLMDNMSHFXKJSESOKFANQO9HJAFWNBDKPLBNSTSVRXULYDRACRBXBZGCMXAIRCNBGLDCITKYLIYW
+<div class="wrapper">
+  <header>
+    <h1>Cheapest way to buy IOTA</h1>
+    <p>
+    I often buy coins at Kraken in order to buy IOTA at Bitfinex. Which coin is the best?
+    </p>
+  </header>
+  <main>
+    <section class="tableWrapper">
+      <div>
+        <h3>Kraken</h3>
+        <table id="res-kraken" class="loading">
+        </table>
+        <table id="res-kraken-eur">
+        </table>
+      </div>
+      <div>
+        <h3>BFX</h3>
+        <table id="res-bfx" class="loading"></table>
+      </div>
+    </section>
+    <section>
+      <h2>Buying IOTA with fiat via Kraken</h2>
+      <table>
+        <tr><td>IOT/USD<br />(BFX)</td><td id="iotusd"></td><tr>
+        <tr><td>USD/ETH (Kraken)<br /> -> ETH/IOT (BFX)</td><td id="iot-ethusd"></td><tr>
+        <tr><td>USD/BTC (Kraken)<br /> -> BTC/IOT (BFX)</td><td id="iot-btcusd"></td><tr>
+      </table>
+    </section>
+  </main>
+  <aside>
+    <h4>Buy me a cup of coffee if you like my efforts:</h4>
+    <pre><code>
+      ICSDEFUOZUIDG9MLMDNMSHFXKJSESOKFANQO9HJAFWNBDKPLBNSTSVRXULYDRACRBXBZGCMXAIRCNBGLDCITKYLIYW
+    </code></pre>
+  </aside>
 </div>
 
 <script>
@@ -113,8 +170,10 @@ I often buy coins at Kraken in order to buy IOTA at Bitfinex. Which coin is the 
         return `<tr><td>${el}</td><td>${lastPrice}</td></tr>`
       }).join('')
 
+      document.getElementById('res-kraken').classList.toggle('loading');
       document.getElementById('res-kraken').innerHTML = hKrakenUsd
       document.getElementById('res-kraken-eur').innerHTML = hKrakenEur
+      document.getElementById('res-bfx').classList.toggle('loading');
       document.getElementById('res-bfx').innerHTML = hBfxUsd
 
       krakenLast.ETHUSD
@@ -134,7 +193,6 @@ I often buy coins at Kraken in order to buy IOTA at Bitfinex. Which coin is the 
       document.getElementById('iot-btcusd').innerHTML = (+krakenLast.BTCUSD *iotBtc[1])
 
     })
-
 </script>
 </body>
 </html>
