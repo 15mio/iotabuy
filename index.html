@@ -1,0 +1,140 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+<body>
+<h1>Cheapest way to buy IOTA</h1>
+
+<div>
+I often buy coins at Kraken in order to buy IOTA at Bitfinex. Which coin is the best?
+</div>
+<br/>
+<br/>
+<div style="float:left; width: 300px">
+  <strong>Kraken</strong>
+
+  <table id="res-kraken">
+  </table>
+
+  <table id="res-kraken-eur">
+  </table>
+</div>
+
+<div style="float:left; width: 300px;">
+  <strong>BFX</strong>
+
+  <table id="res-bfx"></table>
+</div>
+
+<div style="clear: both;">
+  <strong>Buying IOTA with fiat via Kraken</strong>
+
+  <table>
+    <tr><td>IOT/USD     (BFX)</td><td id="iotusd"></td><tr>
+    <tr><td>USD/ETH (Kraken) -> ETH/IOT (BFX)</td><td id="iot-ethusd"></td><tr>
+    <tr><td>USD/BTC (Kraken) -> BTC/IOT (BFX)</td><td id="iot-btcusd"></td><tr>
+  </table>
+</div>
+
+<div>
+  <br/>
+  <br/>
+  <br/>
+  Buy me a cup of coffee if you like my efforts: <br/>
+  <br/>
+  ICSDEFUOZUIDG9MLMDNMSHFXKJSESOKFANQO9HJAFWNBDKPLBNSTSVRXULYDRACRBXBZGCMXAIRCNBGLDCITKYLIYW
+</div>
+
+<script>
+  const krakenUrl = 'https://api.kraken.com/0/public/Ticker?pair=ETHUSD,XBTUSD,XBTEUR,ETHEUR,LTCUSD'
+
+  const bfxUrl = 'https://api.bitfinex.com/v2/tickers?symbols=tETHUSD,tLTCUSD,tBTCUSD,tIOTUSD,tIOTETH,tIOTBTC'
+
+  function getKrakenData (url) {
+    return fetch(url)
+      .then((res) => {
+        return res.json()
+      })
+      .then((parsed) => {
+        const pairs = Object.keys(parsed.result)
+        const cleaned = pairs.map((p) => {
+          const c = p.replace('ZUSD', 'USD')
+            .replace('ZEUR', 'EUR')
+            .replace('XXBT', 'BTC')
+            .replace(/(^X)/, '')
+          return c
+        })
+
+        const krakenLast = pairs.reduce((acc, el, i) => {
+          acc[cleaned[i]] = parsed.result[el].c[0]
+          return acc
+        }, {})
+
+        return krakenLast
+      })
+  }
+
+  function getBfxData (url) {
+    return fetch(bfxUrl)
+      .then((res) => {
+        return res.json()
+      })
+      .then((parsed) => {
+        const lastBfx = parsed.map((el) => {
+          return [
+            el[0].replace(/^t/, ''),
+            el[7]
+          ]
+        })
+
+        return lastBfx
+      })
+  }
+
+  const promises = [
+    getKrakenData(krakenUrl),
+    getBfxData(bfxUrl)
+  ]
+
+  Promise
+    .all(promises)
+    .then(([ krakenLast, bfxLast ]) => {
+      const hKrakenUsd = Object.keys(krakenLast).map((el) => {
+        if (el.match('EUR')) return ''
+        return `<tr><td>${el}</td><td>${krakenLast[el]}</td></tr>`
+      }).join('')
+      const hKrakenEur = Object.keys(krakenLast).map((el) => {
+        if (!el.match('EUR')) return ''
+        return `<tr><td>${el}</td><td>${krakenLast[el]}</td></tr>`
+      }).join('')
+
+
+      const hBfxUsd = bfxLast.map(([ el, lastPrice ]) => {
+        return `<tr><td>${el}</td><td>${lastPrice}</td></tr>`
+      }).join('')
+
+      document.getElementById('res-kraken').innerHTML = hKrakenUsd
+      document.getElementById('res-kraken-eur').innerHTML = hKrakenEur
+      document.getElementById('res-bfx').innerHTML = hBfxUsd
+
+      krakenLast.ETHUSD
+      krakenLast.BTCUSD
+
+      const [
+        ethUsd,
+        ltcUsd,
+        btcUsd,
+        iotUsd,
+        iotEth,
+        iotBtc
+      ] = bfxLast
+
+      document.getElementById('iotusd').innerHTML = iotUsd[1]
+      document.getElementById('iot-ethusd').innerHTML = (+krakenLast.ETHUSD * iotEth[1])
+      document.getElementById('iot-btcusd').innerHTML = (+krakenLast.BTCUSD *iotBtc[1])
+
+    })
+
+</script>
+</body>
+</html>
