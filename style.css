@@ -1,0 +1,65 @@
+body {
+      background: #330867;
+      background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #3f9fad 100%);
+      color: white;
+      font-family: Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      line-height: 1.2;
+      font-weight: 400;
+      margin: 0;
+      padding: 0;
+    }
+    p {font-size: 1.8rem;margin-bottom: 2rem;}
+    .onboarding { background-color: rgba(255,255,255,0.2); border-radius: 4px; padding: 2rem; margin-bottom: 3rem;}
+    .onboarding p { font-size: 1rem; }
+    .onboarding h3 { font-size: 1.5rem; }
+    h1, h2, h3, h4 {margin: 0 0 2rem;font-weight: inherit;}
+    h1 {font-size: 3.5rem;}
+    h2 {font-size: 2.5rem;}
+    h3 {font-size: 2rem;}
+    h4 {font-size: 1.5rem;}
+    a { color: white; }
+    small, .font_small {font-size: 1.5rem;}
+    .imprint, .imprint > p {font-size: 1.0rem;}
+    .imprint_note {margin-top:1.0rem;}
+    .font_tiny {font-size:1rem;}
+    .about{ margin-top: 4rem; }
+    .wrapper {
+      max-width: 45rem;
+      margin: 3rem auto;
+      padding: 1rem;
+    }
+    .tableWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      width: 100%;
+    }
+    @media (min-width: 600px) {
+      .tableWrapper {flex-direction: row;}
+      .tableWrapper > div {margin-right: 2rem;}
+    }
+    .tableWrapper > div {flex-grow: 1;margin-bottom: 3rem;}
+    main {margin-bottom: 3rem;}
+    pre {max-width: 100%;overflow: auto;}
+    table {border-collapse: collapse;table-layout: fixed;width: 100%;overflow: auto}
+    tr {border-bottom: 1px solid rgba(255,255,255,0.3);}
+    tr:first-child {border-top: 1px solid rgba(255,255,255,0.3);}
+    td {padding: 1rem 0; }
+    td:nth-child(even) {text-align: right;}
+    code {white-space: initial;}
+    .loading:before {
+      animation: 1s ease-in infinite loading;
+      background: white;
+      border-radius: 50%;
+      content: '';
+      display: block;
+      height: 1rem;
+      margin: 0 auto;
+      width: 1rem;
+    }
+    @keyframes loading {
+      0% {opacity: 1; transform: scale(1)}
+      50% {opacity: 0.2; transform: scale(1.02)}
+      100% {opacity: 1; transform: scale(1)}
+    }
