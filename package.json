@@ -1,0 +1,23 @@
+{
+  "name": "iotabuy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node dev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertkowalski/iotabuy.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/robertkowalski/iotabuy/issues"
+  },
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/robertkowalski/iotabuy#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
